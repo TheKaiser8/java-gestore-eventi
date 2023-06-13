@@ -1,6 +1,8 @@
 package org.lessons.java.handler;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Main {
@@ -145,6 +147,14 @@ public class Main {
             }
         }
 
+        System.out.println("--------------------------------------"); // linea di demarcazione per rendere più leggibile l'output
+
+        // Istanzio la classe concerto e stampo gli output per verifica
+        Concert concert1 = new Concert("Concerto Live", LocalDate.of(2023, 9, 12), 100, LocalTime.of(21, 0), BigDecimal.valueOf(75.00));
+        System.out.println("Titolo: " + concert1.getTitle());
+        System.out.println("Data e ora: " + concert1.getFormattedDateTime());
+        System.out.println("Prezzo: " + concert1.getFormattedPrice());
+        System.out.println("Stringa formattata: " + concert1);
         scan.close();
     }
 }
