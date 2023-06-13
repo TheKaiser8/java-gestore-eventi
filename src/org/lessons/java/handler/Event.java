@@ -80,8 +80,8 @@ public class Event {
         if (date.isBefore(LocalDate.now())) {
             throw new IllegalStateException("ERRORE: non è possibile disdire la prenotazione di un evento già passato.");
         }
-        if (reservedPlaces == 0) {
-            throw new IllegalStateException("ERRORE: non è possibile disdire perché non risulta alcuna prenotazione.");
+        if (reservedPlaces <= 0) {
+            throw new IllegalStateException("ERRORE: non è possibile disdire perché non risulta alcuna prenotazione o la richiesta è superiore ai posti prenotati.");
         }
         reservedPlaces--;
     }

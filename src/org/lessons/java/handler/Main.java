@@ -79,7 +79,7 @@ public class Main {
             String choice = scan.nextLine();
             boolean exitBooking = false;
             while (!exitBooking && event1.calcAvailablePlaces() > 0) {
-                // se SI gli chiedo quanti posti vuole prenotare
+                // se SI chiedo quanti posti vuole prenotare
                 if (choice.equalsIgnoreCase("s")) {
                     try {
                         System.out.print("Quanti posti vuoi prenotare? ");
@@ -88,6 +88,7 @@ public class Main {
                         for (int i = 0; i < numReservedPlaces; i++) {
                             event1.booking();
                         }
+                        System.out.println("Hai prenotato " + numReservedPlaces + (numReservedPlaces == 1 ? " posto" : " posti") + "!");
                         System.out.println("Numero posti prenotati: " + event1.getReservedPlaces());
                         System.out.println("Numero posti disponibili: " + event1.calcAvailablePlaces());
 
@@ -103,6 +104,43 @@ public class Main {
                 else {
                     System.out.println("Arrivederci");
                     exitBooking = true;
+                }
+            }
+        }
+
+        System.out.println("--------------------------------------"); // linea di demarcazione per rendere più leggibile l'output
+
+        // effettuo una disdetta se l'evento è stato istanziato correttamente e se risultano posti prenotati
+        if (event1 != null && event1.getReservedPlaces() > 0) {
+            System.out.print("Vuoi effettuare una disdetta? (\"s\" per confermare) ");
+            String choice = scan.nextLine();
+            boolean exitCancelBooking = false;
+            while (!exitCancelBooking) {
+                // se SI chiedo quanti posti vuole disdire
+                if (choice.equalsIgnoreCase("s")) {
+                    try {
+                        System.out.print("Quanti posti vuoi disdire? ");
+                        int numCancelledPlaces = Integer.parseInt(scan.nextLine());
+
+                        for (int i = 0; i < numCancelledPlaces; i++) {
+                            event1.cancelBooking();
+                        }
+                        System.out.println("Hai disdetto " + numCancelledPlaces + (numCancelledPlaces == 1 ? " posto" : " posti") + "!");
+                        System.out.println("Numero posti prenotati: " + event1.getReservedPlaces());
+                        System.out.println("Numero posti disponibili: " + event1.calcAvailablePlaces());
+
+                    } catch (IllegalStateException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    if (event1.calcAvailablePlaces() > 0) {
+                        System.out.print("Vuoi effettuare un'altra disdetta? (\"s\" per confermare) ");
+                        choice = scan.nextLine();
+                    }
+                }
+                // altrimenti esco dal sistema di disdetta prenotazioni
+                else {
+                    System.out.println("Arrivederci");
+                    exitCancelBooking = true;
                 }
             }
         }
