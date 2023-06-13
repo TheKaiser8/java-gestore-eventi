@@ -80,6 +80,7 @@ public class Main {
             System.out.print("Vuoi effettuare una prenotazione? (\"s\" per confermare) ");
             String choice = scan.nextLine();
             boolean exitBooking = false;
+            boolean hasBooking = false; // variabile booleana per avere 2 messaggi di uscita differenti
 
             while (!exitBooking) {
                 // se SI chiedo quanti posti vuole prenotare
@@ -95,6 +96,7 @@ public class Main {
                             System.out.println("Hai prenotato " + numReservedPlaces + (numReservedPlaces == 1 ? " posto" : " posti") + "!");
                             System.out.println("Numero posti prenotati: " + event1.getReservedPlaces());
                             System.out.println("Numero posti disponibili: " + event1.calcAvailablePlaces());
+                            hasBooking = true;
                         } else {
                             System.out.println("ERRORE: Il numero di posti richiesti supera i posti disponibili.");
                         }
@@ -113,7 +115,11 @@ public class Main {
                 }
                 // altrimenti esco dal sistema di prenotazione
                 else {
-                    System.out.println("Grazie per aver utilizzato il nostro sistema di prenotazione!");
+                    if (hasBooking) {
+                        System.out.println("Grazie per aver utilizzato il nostro sistema di prenotazione!");
+                    } else {
+                        System.out.println("Grazie per aver inserito il tuo evento, arrivederci!");
+                    }
                     exitBooking = true;
                 }
             }
@@ -126,6 +132,7 @@ public class Main {
             System.out.print("Vuoi effettuare una disdetta? (\"s\" per confermare) ");
             String choice = scan.nextLine();
             boolean exitCancelBooking = false;
+            boolean hasCancelledBooking = false; // variabile booleana per avere 2 messaggi di uscita differenti
 
             while (!exitCancelBooking) {
                 // se SI chiedo quanti posti vuole disdire
@@ -141,6 +148,7 @@ public class Main {
                             System.out.println("Hai disdetto " + numCancelledPlaces + (numCancelledPlaces == 1 ? " posto" : " posti") + "!");
                             System.out.println("Numero posti prenotati: " + event1.getReservedPlaces());
                             System.out.println("Numero posti disponibili: " + event1.calcAvailablePlaces());
+                            hasCancelledBooking = true;
                         } else {
                             System.out.println("ERRORE: Il numero di posti da disdire supera i posti prenotati.");
                         }
@@ -159,7 +167,11 @@ public class Main {
                 }
                 // altrimenti esco dal sistema di disdetta prenotazioni
                 else {
-                    System.out.println("Ci dispiace che tu abbia disdetto la tua prenotazione, ci auguriamo di rivederti presto!");
+                    if (hasCancelledBooking) {
+                        System.out.println("Ci dispiace che tu abbia disdetto la tua prenotazione, ci auguriamo di rivederti presto!");
+                    } else {
+                        System.out.println("Grazie per aver utilizzato il nostro portale, arrivederci!");
+                    }
                     exitCancelBooking = true;
                 }
             }
