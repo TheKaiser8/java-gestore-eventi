@@ -71,7 +71,7 @@ public class Event {
             throw new IllegalStateException("ERRORE: non è possibile effettuare la prenotazione perché l'evento è già passato.");
         }
         if (calcAvailablePlaces() <= 0) {
-            throw new IllegalStateException("ERRORE: non è possibile effettuare la prenotazione perché i posti sono esauriti");
+            throw new IllegalStateException("ERRORE: non è possibile effettuare la prenotazione perché i posti sono esauriti o la richiesta è superiore ai posti disponibili");
         }
         reservedPlaces++;
     }
@@ -90,9 +90,12 @@ public class Event {
         return totalPlaces - reservedPlaces;
     }
 
+    public String getFormattedDate() {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return date.format(formatter) + " - " + title;
+        return getFormattedDate() + " - " + title;
     }
 }
